@@ -1,0 +1,29 @@
+{
+  "@pnp/generator-spfx": {
+    "framework": "react",
+    "pnpFramework": "reactjs.plus",
+    "pnp-libraries": [
+      "@pnp/spfx-property-controls",
+      "rush@3.9"
+    ],
+    "pnp-ci": "no-devops",
+    "pnp-vetting": [
+      "webpack-analyzer",
+      "stylelint",
+      "csscomb"
+    ],
+    "spfxenv": "spo",
+    "pnp-testing": []
+  },
+  "@microsoft/generator-sharepoint": {
+    "environment": "spo",
+    "framework": "react",
+    "isCreatingSolution": true,
+    "version": "1.11.0",
+    "libraryName": "page-dividers",
+    "libraryId": "639dde4d-9bb4-4674-9279-c1e7a0c7d536",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
