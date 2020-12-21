@@ -1,7 +1,15 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
+:export {
+  sectionminheight: 322;
+}
+
 .shapeDividers {
+  margin-top: -1px;
+  margin-bottom: -1px;
   color: inherit;
-  min-height: 320px;
+  min-height: 322px;
+  height: 322px;
+  overflow: hidden;
   //background-color: rgb(48, 57, 82);
 }

@@ -1,10 +1,34 @@
 declare interface IShapeDividersWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
+  ColorGroupName: string;
+  CustomShapeGroupName: string;
   DescriptionFieldLabel: string;
-TopFieldLabel: string;
-TopFieldOffText: string;
-TopFieldOnText: string;
+  HeightFieldLabel: string;
+  TopFieldLabel: string;
+  TopFieldOffText: string;
+  TopFieldOnText: string;
+  HorizontalFlipFieldLabel: string;
+  HorizontalFlipOnText: string;
+  HorizontalFlipOffText: string;
+  NumLayersFieldLabel: string;
+  NumWavesFieldLabel: string;
+  ShapeColorFieldName: string;
+  ShapeColorNeutral: string;
+  ShapeColorNone: string;
+  ShapeColorSoft: string;
+  ShapeColorStrong: string;
+  ShapeColorWarning: string;
+  ShapeCurve: string;
+  ShapeFieldLabel: string;
+  ShapeOffsetCurve: string;
+  ShapeOffsetTriangle: string;
+  ShapeSlant: string;
+  ShapeTriangle: string;
+  ShapeWave: string;
+  ShapeWaves: string;
+  ShapeCustom: string;
+  WidthFieldLabel: string;
 }
 
 declare module 'ShapeDividersWebPartStrings' {

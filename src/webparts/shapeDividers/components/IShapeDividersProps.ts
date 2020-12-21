@@ -5,5 +5,9 @@ export interface IShapeDividersProps {
   top: boolean;
   horizontalFlip: boolean;
   height: number;
-  wave: string;
+  width: number;
+  shape: string;
+  shapeColor: string;
+  numWaves: number;
+  numLayers: number;
 }

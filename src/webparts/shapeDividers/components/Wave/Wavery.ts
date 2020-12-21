@@ -1,14 +1,15 @@
 // Inspired by https://github.com/anup-a/svgwave/tree/main/src/wave
 const defaultOptions = {};
-const svgns = 'http://www.w3.org/2000/svg';
-import { computeControlPoints } from 'bezier-spline';
+import { computeControlPoints  } from './bezier-spline';
 import { ISVG } from './ISVG';
 import { IWaveryProps } from './IWaveryProps';
 
+export const svgns = 'http://www.w3.org/2000/svg';
 export class Wavery {
   private properties: IWaveryProps;
   private points: any[];
   constructor(properties: IWaveryProps) {
+    console.log("Wavery constructor");
     this.properties = { ...defaultOptions, ...properties };
     this.points = this.generatePoints(
       this.properties.width,
@@ -17,19 +18,27 @@ export class Wavery {
       this.properties.layerCount,
       this.properties.variance,
     );
+
+    console.log("Wavery constructor points", this.points);
   }
 
   public generateSvg() {
+    console.log("Generate SVG");
     //   Creates an element with the specified namespace URI
     const svg = document.createElementNS(svgns, 'svg');
+    console.log("Generate SVG 2");
     svg.setAttribute('width', this.properties.width+"");
+    console.log("Generate SVG 3");
     svg.setAttribute('height', this.properties.height+"");
+    console.log("Generate SVG 4");
     svg.setAttribute('xmlns', svgns);
+    console.log("Generate SVG 5");
 
     const pathList = [];
 
     // Append layer of a wave
     for (let i = 0; i < this.points.length; i++) {
+      console.log("Generate SVG 5 - 1");
       pathList.push(
         this.generateClosedPath(
           this.points[i],
@@ -41,6 +50,7 @@ export class Wavery {
         ),
       );
     }
+    console.log("Generate SVG 6");
 
     const svgData: ISVG = {
       svg: {
@@ -50,6 +60,7 @@ export class Wavery {
         path: pathList,
       },
     };
+    console.log("Generate SVG 7");
 
     return svgData;
   }
@@ -62,6 +73,8 @@ export class Wavery {
     strokeColor,
     strokeWidth,
   ) {
+
+    console.log("Generate Closed Path");
     const xPoints = curvePoints.map((p) => p.x);
     const yPoints = curvePoints.map((p) => p.y);
 
