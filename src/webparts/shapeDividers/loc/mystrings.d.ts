@@ -2,6 +2,7 @@ declare interface IShapeDividersWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   ColorGroupName: string;
+  CustomShapeGradientLabel: string;
   CustomShapeGroupName: string;
   DescriptionFieldLabel: string;
   HeightFieldLabel: string;

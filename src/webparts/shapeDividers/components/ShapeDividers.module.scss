@@ -1,15 +1,17 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
+/*
+Minimum section heights seem to be 320px. We're adding 1px above and below to remove gaps/borders
+*/
 :export {
-  sectionminheight: 322;
+  sectionminheight: 320;
 }
 
 .shapeDividers {
-  margin-top: -1px;
-  margin-bottom: -1px;
-  color: inherit;
-  min-height: 322px;
-  height: 322px;
+  /* Using a minus margin to remove gaps between sections */
+  // margin-top: -1px;
+  // margin-bottom: -1px;
+  min-height: 320px;
+  height: 320px;
   overflow: hidden;
-  //background-color: rgb(48, 57, 82);
 }

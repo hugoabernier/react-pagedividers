@@ -35,6 +35,7 @@ export interface IShapeDividersWebPartProps {
   shapeColor: string;
   numWaves: number;
   numLayers: number;
+  gradient: boolean;
 }
 
 export default class ShapeDividersWebPart extends BaseClientSideWebPart<IShapeDividersWebPartProps> {
@@ -79,7 +80,9 @@ export default class ShapeDividersWebPart extends BaseClientSideWebPart<IShapeDi
         width: this.properties.width,
         shapeColor: this.properties.shapeColor,
         numWaves: this.properties.numWaves,
-        numLayers: this.properties.numLayers
+        numLayers: this.properties.numLayers,
+        gradient: this.properties.gradient,
+        uniqueId: this.instanceId
       }
     );
 
@@ -172,10 +175,10 @@ export default class ShapeDividersWebPart extends BaseClientSideWebPart<IShapeDi
                       key: 'waves',
                       text: strings.ShapeWaves
                     },
-                    // {
-                    //   key: 'custom',
-                    //   text: 'Custom'
-                    // }
+                    {
+                      key: 'custom',
+                      text: strings.ShapeCustom
+                    }
                   ]
                 }),
               ]
@@ -216,11 +219,15 @@ export default class ShapeDividersWebPart extends BaseClientSideWebPart<IShapeDi
                 PropertyPaneSlider('numLayers', {
                   label: strings.NumLayersFieldLabel,
                   max: 5,
-                  min: 1,
+                  min: 2,
                   step: 1,
                   showValue: true,
                   value: this.properties.numLayers
                 }),
+                PropertyPaneToggle('gradient', {
+                  label: strings.CustomShapeGradientLabel,
+                  checked: this.properties.gradient
+                })
               ]
             }
           ]

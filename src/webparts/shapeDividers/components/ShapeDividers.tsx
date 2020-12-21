@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ShapeDividers.module.scss';
 import { IShapeDividersProps } from './IShapeDividersProps';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
-import { ISVG, IWaveryProps, waveInit, svgns, OPACITY_ARR, MAX_WAVES } from './Wave';
+import { CustomWave } from './CustomWave';
 
 export default class ShapeDividers extends React.Component<IShapeDividersProps, {}> {
 
@@ -12,71 +12,9 @@ export default class ShapeDividers extends React.Component<IShapeDividersProps, 
     const { shapeColor } = this.props;
 
     const bgColor: string = shapeColor;
-    const fgColor: string = this.props.themeVariant.semanticColors.bodyBackground;
+    const fgColor: string = semanticColors.bodyBackground;
 
     const bufferHeight: number = (+styles.sectionminheight) - this.props.height;
-    console.log("Section min height", +styles.sectionminheight, bufferHeight);
-
-    const wave: IWaveryProps = {
-      height: 120,
-      width: 1200,
-      segmentCount: this.props.numWaves,
-      layerCount: this.props.numLayers,
-      variance: 0.75,
-      strokeWidth: 0,
-      fillColor: bgColor,
-      strokeColor: 'none',
-    };
-
-    const genSVG: ISVG = waveInit(wave);
-
-    const { height, xmlns, path } = genSVG.svg;
-    const num_waves = path.length;
-    const opac = OPACITY_ARR.slice(MAX_WAVES - num_waves);
-
-    const gradient: boolean = false;
-
-    const gradColors = {
-      colorOne: '#002bdc',
-      colorTwo: '#32ded4',
-    };
-
-
-    const svg = path.map((p, index) => {
-          return gradient ? (
-            [
-              <defs>
-                <linearGradient id={`gradient`}>
-                  <stop
-                    offset="5%"
-                    stop-color={`${gradColors.colorOne}${opac[index]}`}
-                  />
-                  <stop
-                    offset="95%"
-                    stop-color={`${gradColors.colorTwo}${opac[index]}`}
-                  />
-                </linearGradient>
-              </defs>,
-              <path
-                key={index}
-                d={p.d}
-                stroke={p.strokeColor}
-                strokeWidth={p.strokeWidth}
-                fill={gradient ? `url(#gradient)` : `${bgColor}${opac[index]}`}
-                className="transition-all duration-300 ease-in-out delay-150"
-              ></path>,
-            ]
-          ) : (
-            <path
-              key={index}
-              d={p.d}
-              stroke={p.strokeColor}
-              strokeWidth={p.strokeWidth}
-              fill={gradient ? 'url(#gradient)' : `${bgColor}${opac[index]}`}
-              className="transition-all duration-300 ease-in-out delay-150"
-            ></path>
-          );
-    });
 
     let svgPath: JSX.Element;
 
@@ -113,7 +51,18 @@ export default class ShapeDividers extends React.Component<IShapeDividersProps, 
         </path>;
         break;
       case "custom":
-        svgPath = <> {svg} </>;
+        svgPath = <CustomWave
+        height={120}
+        width={1200}
+        fillColor={fgColor}
+        bgColor={bgColor}
+        strokeColor={'none'}
+        segmentCount={this.props.numWaves}
+        layerCount={this.props.numLayers}
+        gradient={this.props.gradient}
+        variance={0.75}
+        strokeWidth={0}
+        uniqueId={this.props.uniqueId}></CustomWave>;
 
         break;
       default:
@@ -127,7 +76,9 @@ export default class ShapeDividers extends React.Component<IShapeDividersProps, 
           backgroundColor: fgColor
           }} ></div> }
         <div style={{
-          height: `${this.props.height}px` , overflow: 'hidden'
+          height: `${this.props.height}px`,
+          overflow: 'hidden',
+          marginTop: '-1px'
         }} >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: `100%`, width: `${this.props.width}%` }}>
             {svgPath}

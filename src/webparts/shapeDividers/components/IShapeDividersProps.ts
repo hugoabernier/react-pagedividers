@@ -10,4 +10,6 @@ export interface IShapeDividersProps {
   shapeColor: string;
   numWaves: number;
   numLayers: number;
+  gradient: boolean;
+  uniqueId: string;
 }
