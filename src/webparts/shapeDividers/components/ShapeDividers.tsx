@@ -78,7 +78,7 @@ export default class ShapeDividers extends React.Component<IShapeDividersProps, 
         <div style={{
           height: `${this.props.height}px`,
           overflow: 'hidden',
-          marginTop: '-1px'
+          // marginTop: '-1px'
         }} >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: `100%`, width: `${this.props.width}%` }}>
             {svgPath}

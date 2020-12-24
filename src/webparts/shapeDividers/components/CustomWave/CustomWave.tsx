@@ -233,7 +233,8 @@ export class CustomWave extends React.Component<ICustomWaveProps, ICustomWaveSta
 });
 
     return (
-      <><g transform="scale(-1,1)">{svg}</g></>
+      // <><g transform="scale(-1,1)">{svg}</g></>
+      <>{svg}</>
     );
   }
 }
