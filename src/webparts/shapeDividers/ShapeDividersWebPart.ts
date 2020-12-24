@@ -144,40 +144,50 @@ export default class ShapeDividersWebPart extends BaseClientSideWebPart<IShapeDi
                     {
                       key: 'slant',
                       text: strings.ShapeSlant,
-                      // selectedImageSrc: layoutBrick,
-                      // imageSrc: layoutBrick,
+                      selectedImageSrc: require('./assets/slant.svg'),
+                      imageSrc: require('./assets/slant.svg'),
                     },
                     {
                       key: 'wave',
                       text: strings.ShapeWave,
-                      // selectedImageSrc: layoutGrid,
-                      // imageSrc: layoutGrid,
+                      selectedImageSrc: require('./assets/wave.svg'),
+                      imageSrc: require('./assets/wave.svg'),
                     },
                     {
                       key: 'curve',
                       text: strings.ShapeCurve,
-                      // selectedImageSrc: layoutCarousel,
-                      // imageSrc: layoutCarousel,
+                      selectedImageSrc: require('./assets/curve.svg'),
+                      imageSrc: require('./assets/curve.svg'),
                     },
                     {
                       key: 'offsetcurve',
-                      text: strings.ShapeOffsetCurve
+                      text: strings.ShapeOffsetCurve,
+                      selectedImageSrc: require('./assets/offsetcurve.svg'),
+                      imageSrc: require('./assets/offsetcurve.svg'),
                     },
                     {
                       key: 'triangle',
-                      text: strings.ShapeTriangle
+                      text: strings.ShapeTriangle,
+                      selectedImageSrc: require('./assets/triangle.svg'),
+                      imageSrc: require('./assets/triangle.svg'),
                     },
                     {
                       key: 'offsettriangle',
-                      text: strings.ShapeOffsetTriangle
+                      text: strings.ShapeOffsetTriangle,
+                      selectedImageSrc: require('./assets/offsettriangle.svg'),
+                      imageSrc: require('./assets/offsettriangle.svg'),
                     },
                     {
                       key: 'waves',
-                      text: strings.ShapeWaves
+                      text: strings.ShapeWaves,
+                      selectedImageSrc: require('./assets/waves.svg'),
+                      imageSrc: require('./assets/waves.svg'),
                     },
                     {
                       key: 'custom',
-                      text: strings.ShapeCustom
+                      text: strings.ShapeCustom,
+                      selectedImageSrc: require('./assets/custom.svg'),
+                      imageSrc: require('./assets/custom.svg'),
                     }
                   ]
                 }),
