@@ -8,10 +8,12 @@ Minimum section heights seem to be 320px. We're adding 1px above and below to re
 }
 
 .shapeDividers {
-  /* Using a minus margin to remove gaps between sections */
-  // margin-top: -1px;
-  // margin-bottom: -1px;
   min-height: 320px;
   height: 320px;
   overflow: hidden;
+  border: none;
+
+  // svg {
+  //   background-color: $ms-color-purpleLight;
+  // }
 }

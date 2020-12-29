@@ -2,10 +2,89 @@ import * as React from 'react';
 import styles from './ShapeDividers.module.scss';
 import { IShapeDividersProps } from './IShapeDividersProps';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import * as d3 from 'd3';
+import { path } from 'd3-path';
+
 import { CustomWave } from './CustomWave';
 
 export default class ShapeDividers extends React.Component<IShapeDividersProps, {}> {
+  private _svg: SVGElement;
 
+  public componentDidMount(): void {
+    this.renderSeparator();
+  }
+
+  public componentDidUpdate(prevProps: IShapeDividersProps, prevState: {}): void {
+    this.renderSeparator();
+  }
+
+  private renderSeparator() {
+    const { semanticColors }: IReadonlyTheme = this.props.themeVariant;
+    const { shapeColor } = this.props;
+
+    const bgColor: string = shapeColor;
+    const fgColor: string = semanticColors.bodyBackground;
+    const bufferHeight: number = (+styles.sectionminheight) - this.props.height - 1;
+    const topBuffer: number = this.props.top ? 0 : bufferHeight;
+
+
+    d3.select(this._svg).selectAll("*").remove();
+    let path1 = d3.path();
+
+    switch (this.props.shape) {
+      case "wave":
+        const waveTop: number = this.props.top ? 0 : bufferHeight;
+        path1 = `M321.39,56.44
+        C379.39,45.65,435.55,26.31,493.39,14.58
+        C575.78,-2.14,661.58,-3.15,743.84,14.19
+        C823.78,31,906.67,72,985.66,92.83
+        C1055.71,111.31,1132.19,118.92,1200,95.83
+        V0
+        H0
+        V27.35
+        A600.21,600.21,0,0,0,321.39,56.44Z`;
+        
+        //<path d="M 321.4 56.4 C 379.4 45.6 435.6 26.3 493.4 14.6 C 575.8 -2.1 661.6 -3.1 743.8 14.2 C 823.8 31 906.7 72 985.7 92.8 C 1055.7 111.3 1132.2 118.9 1200 95.8 V 0 H 0 V 27.4 A 600.2 600.2 0 0 0 321.4 56.4 Z" fill="red"></path>
+        // path1.moveTo(321.39, 56.44);
+        // path1.bezierCurveTo(379.39, 45.65, 435.55, 26.31, 493.39, 14.58);
+        // path1.bezierCurveTo(575.78, -2.14, 661.58, -3.15, 743.84, 14.19);
+        // path1.bezierCurveTo(823.78, 31, 906.67, 72, 985.66, 92.83);
+        // path1.bezierCurveTo(1055.71, 111.31, 1132.19, 118.92, 1200, 95.83);
+        // path1.lineTo(1200, 0);
+        // path1.lineTo(0, 0);
+        // path1.lineTo(0, 27.35);
+        // path1.arc(600.21,600.21,0,0,0,321.39,56.44);
+        // path1.closePath();
+        break;
+      case "triangle":
+        //const data = [[0,0],[1200,0],[1200, topBuffer], [600, topBuffer+ this.props.height], [0, topBuffer]];
+        path1.moveTo(0, 0);
+        path1.lineTo(1200, 0);
+        path1.lineTo(1200, topBuffer);
+        path1.lineTo(600, topBuffer + this.props.height);
+        path1.lineTo(0, topBuffer);
+        path1.closePath();
+        break;
+
+      case "offsettriangle":
+        path1.moveTo(0, 0);
+        path1.lineTo(1200, 0);
+        path1.lineTo(1200, topBuffer);
+        path1.lineTo(892.25, topBuffer + this.props.height);
+        path1.lineTo(0, topBuffer);
+        path1.closePath();
+        break;
+      default:
+        break;
+    }
+
+
+    d3.select(this._svg)
+      .append("path")
+      .attr("d", path1)
+      .attr("fill", bgColor)
+      .attr("transform", this.props.horizontalFlip ? "matrix(-1 0 0 1 1200 0)" : undefined);
+  }
 
   public render(): React.ReactElement<IShapeDividersProps> {
     const { semanticColors }: IReadonlyTheme = this.props.themeVariant;
@@ -46,42 +125,36 @@ export default class ShapeDividers extends React.Component<IShapeDividersProps, 
         break;
       case "custom":
         svgPath = <CustomWave
-        height={120}
-        width={1200}
-        fillColor={fgColor}
-        bgColor={bgColor}
-        strokeColor={'none'}
-        segmentCount={this.props.numWaves}
-        layerCount={this.props.numLayers}
-        gradient={this.props.gradient}
-        variance={0.75}
-        strokeWidth={0}
-        uniqueId={this.props.uniqueId}></CustomWave>;
+          height={120}
+          width={1200}
+          fillColor={fgColor}
+          bgColor={bgColor}
+          strokeColor={'none'}
+          segmentCount={this.props.numWaves}
+          layerCount={this.props.numLayers}
+          gradient={this.props.gradient}
+          variance={0.75}
+          strokeWidth={0}
+          uniqueId={this.props.uniqueId}></CustomWave>;
 
         break;
       default:
         svgPath = <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" style={{ stroke: 'none', fill: fgColor }} transform={this.props.horizontalFlip ? 'matrix(-1 0 0 1 1200 0)' : undefined}></path>;
         break;
     }
+
+
+
     return (
-      <div className={styles.shapeDividers} style={{ backgroundColor: bgColor }}>
-         { !this.props.top && <div style={{
-          height: `${bufferHeight}px`,
-          backgroundColor: fgColor
-          }} ></div> }
-        <div style={{
-          height: `${this.props.height}px`,
-          overflow: 'hidden',
-          // marginTop: '-1px'
-        }} >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: `100%`, width: `${this.props.width}%` }}>
-            {svgPath}
-          </svg>
-        </div>
-        { this.props.top && <div style={{
-          height: `${bufferHeight}px`,
-          backgroundColor: bgColor
-          }} ></div> }
+      <div className={styles.shapeDividers}>
+        <svg
+          ref={(elm: SVGSVGElement) => this._svg = elm}
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 320"
+          style={{ height: `320px`, width: `${this.props.width}%`, border: 'none' }}
+        >
+        </svg>
       </div>
     );
   }
